@@ -1,0 +1,26 @@
+<%
+  if action== 'new'
+    buttonTxt= 'Add Album'
+    actionUrl= albums_url
+  else
+    buttonTxt = 'Edit Album'
+    actionUrl = edit_album_url(@album)
+  end
+%>
+
+<h1> Add Album to a Band</h1>
+<form  action=" <%= actionUrl %> " method="post">
+    <%= form_auth %>
+    <label for="title">Title</label>
+    <input type="text" name="album[title]" value = <%= @album.title %> >
+  <select name = "album[band_id]">
+    <% @bands.each do |band| %>
+      <option value="<%= band.id %>" <%= "selected" if band.id == @album.band_id %> > <%= band.name %> </option>
+    <% end %>
+  </select>
+  <label for="year">Year</label>
+  <input type="text" name="album[year]">
+  <input type="radio" name="album[livestudio]" value ="true" <%= "selected" if @album.livestudio %> > Live <br>
+  <input type="radio" name = "album[livestudio]" value= "false" <%= "selected" if !@album.livestudio %> >Studio<br>
+  <input type="submit" value=" <%= buttonTxt %>">
+</form>

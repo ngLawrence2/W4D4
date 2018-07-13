@@ -1,0 +1,17 @@
+<% if action == 'edit'
+  formAction = band_url(@band)
+else
+  formAction = bands_url
+end
+%>
+
+<h3><%= postForm %></h3>
+<form action= "<%= formAction %>" method="post">
+  <%= form_auth %>
+  <% if action == 'edit' %>
+    <input type="hidden" name="_method" value="patch">
+    <% end %>
+  <label for="name">Name: </label>
+  <input type="text" name="band[name]" value="<%= @band.name  %>">
+  <input type="submit" value="<%= postForm %>">
+</form>
